@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEJAAN Administradora — Gestão de Condomínios em Niterói</title>
+  <meta name="description" content="Administradora de condomínios completa, moderna e transparente. Mais de 100 condomínios gerenciados em Niterói-RJ." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #112240;
+      --navy-light: #1B3A6B;
+      --gold: #C9A84C;
+      --gold-light: #E2C06A;
+      --white: #FFFFFF;
+      --gray-100: #F5F7FA;
+      --gray-200: #E8ECF2;
+      --gray-400: #8A94A6;
+      --gray-600: #4A5568;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.12);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,22,40,0.96);
+      backdrop-filter: blur(16px);
+      padding: 14px 0;
+      box-shadow: 0 2px 32px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .nav-logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(27,58,107,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(201,168,76,0.12) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+    }
+    .hero-badge span {
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.06);
+    }
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card-main {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+    }
+    .hero-card-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .hero-card-value {
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-card-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
+    .hero-card-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 24px 0;
+    }
+    .hero-card-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .hero-card-stat label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .hero-card-stat strong {
+      font-size: 22px;
+      color: var(--white);
+      font-weight: 600;
+    }
+    .hero-float-1, .hero-float-2 {
+      position: absolute;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-float-1 {
+      top: -20px;
+      right: -20px;
+    }
+    .hero-float-2 {
+      bottom: -20px;
+      left: -20px;
+    }
+    .float-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .float-icon.gold { background: rgba(201,168,76,0.2); }
+    .float-icon.blue { background: rgba(27,74,107,0.4); }
+    .float-text strong {
+      display: block;
+      font-size: 13px;
+      color: var(--white);
+      font-weight: 600;
+    }
+    .float-text span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+      animation: scrollLine 2s infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ─── STATS BAR ───────────────────────────────────── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 40px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-number span { color: var(--gold); }
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── SECTION COMMONS ─────────────────────────────── */
+    section { padding: 100px 0; }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .section-desc {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .section-head { margin-bottom: 64px; }
+
+    /* ─── SERVICES ────────────────────────────────────── */
+    .services { background: var(--gray-100); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      border: 1px solid var(--gray-200);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 24px;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon { background: rgba(201,168,76,0.2); }
+    .service-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.65;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-wrap {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border-radius: var(--radius-lg);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .about-img-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .about-img-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .about-img-text .big {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+    .about-img-text .small {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 8px;
+      display: block;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-badge-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .about-badge strong {
+      display: block;
+      font-size: 18px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .about-badge span {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .about-feature-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .about-feature-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .about-feature-text p {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ─── PROCESS ─────────────────────────────────────── */
+    .process { background: var(--navy); }
+    .process .section-title { color: var(--white); }
+    .process .section-desc { color: rgba(255,255,255,0.55); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 32px; left: 12.5%; right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+    .process-step {
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+    }
+    .step-num {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    /* ─── PORTAL ──────────────────────────────────────── */
+    .portal { background: var(--gray-100); }
+    .portal-inner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .portal-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .portal-feature {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--gray-200);
+    }
+    .portal-feature-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .portal-feature h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .portal-feature p {
+      font-size: 12px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+    .portal-visual-wrap {
+      background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .portal-visual-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .portal-mock {
+      position: relative;
+      z-index: 2;
+    }
+    .portal-mock-bar {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dot.r { background: #FF5F57; }
+    .mock-dot.y { background: #FEBC2E; }
+    .mock-dot.g { background: #28C840; }
+    .mock-url {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+    }
+    .portal-mock-body {
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .mock-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mock-row:last-child { border-bottom: none; }
+    .mock-row-left { font-size: 12px; color: rgba(255,255,255,0.6); }
+    .mock-row-right {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .mock-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .mock-badge.green { background: rgba(40,200,64,0.15); color: #28C840; }
+    .mock-badge.yellow { background: rgba(254,188,46,0.15); color: #FEBC2E; }
+
+    /* ─── TESTIMONIALS ────────────────────────────────── */
+    .testimonials { background: var(--white); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--gray-100);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid var(--gray-200);
+      position: relative;
+    }
+    .testimonial-quote {
+      font-size: 48px;
+      color: var(--gold);
+      line-height: 1;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .author-role {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    .contact { background: var(--navy); }
+    .contact .section-title { color: var(--white); }
+    .contact .section-desc { color: rgba(255,255,255,0.55); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .contact-item-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .contact-item-body h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .contact-item-body p, .contact-item-body a {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      line-height: 1.5;
+    }
+    .contact-item-body a:hover { color: var(--gold); }
+    .contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+    }
+    .form-group select option { background: var(--navy-mid); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; justify-content: center; font-size: 16px; }
+    .form-note {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ─── HOURS ───────────────────────────────────────── */
+    .hours-bar {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      padding: 24px 0;
+    }
+    .hours-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .hours-text {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hours-text .icon { font-size: 28px; }
+    .hours-text strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .hours-text span {
+      font-size: 13px;
+      color: rgba(10,22,40,0.7);
+    }
+    .hours-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .hours-cta:hover { background: var(--navy-mid); transform: translateY(-1px); }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: #060F1E;
+      padding: 64px 0 32px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      margin: 16px 0 24px;
+      max-width: 280px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .social-link {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    .social-link:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .footer-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-copy a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ─── WHATSAPP FLOAT ──────────────────────────────── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #25D366;
+      color: white;
+      padding: 14px 22px 14px 18px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+      transition: all 0.3s;
+    }
+    .whatsapp-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(37,211,102,0.5);
+    }
+    .whatsapp-float svg { width: 22px; height: 22px; }
+
+    /* ─── ANIMATIONS ──────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-inner { gap: 48px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; gap: 60px; padding-top: 100px; }
+      .hero-visual { display: none; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.06); }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid, .portal-inner-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { display: none; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-steps::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .whatsapp-float { bottom: 20px; right: 20px; padding: 14px 18px; }
+      .whatsapp-float .wapp-label { display: none; }
+      .hero-scroll { display: none; }
+    }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,22,40,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 24px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">S</div>
+      <span class="nav-logo-text">SEJAAN<span>.</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#sobre">Sobre nós</a></li>
+      <li><a href="#portal">Portal</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="https://www.immobileweb.com.br/login/sejaan" target="_blank" class="nav-cta">Área do Cliente</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="openMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMenu()">✕</button>
+  <a href="#servicos" onclick="closeMenu()">Serviços</a>
+  <a href="#sobre" onclick="closeMenu()">Sobre nós</a>
+  <a href="#portal" onclick="closeMenu()">Portal</a>
+  <a href="#contato" onclick="closeMenu()">Contato</a>
+  <a href="https://www.immobileweb.com.br/login/sejaan" target="_blank" style="color: var(--gold);">Área do Cliente ↗</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <div class="hero-badge-dot"></div>
+        <span>Administradora de Condomínios · Niterói-RJ</span>
+      </div>
+      <h1 class="hero-title fade-up delay-1">
+        Gestão condominial<br /><em>completa e moderna</em>
+      </h1>
+      <p class="hero-subtitle fade-up delay-2">
+        Há mais de uma década cuidamos do seu condomínio com transparência, eficiência e dedicação total. Mais de 100 condomínios confiam na SEJAAN.
+      </p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="#contato" class="btn-primary">
+          Solicitar proposta
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#servicos" class="btn-ghost">
+          Nossos serviços
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual fade-up delay-2">
+      <div class="hero-card-main">
+        <div class="hero-card-label">Condomínios gerenciados</div>
+        <div class="hero-card-value">100<span style="color:var(--gold);font-size:36px">+</span></div>
+        <div class="hero-card-sub">em toda a região de Niterói-RJ</div>
+        <div class="hero-card-divider"></div>
+        <div class="hero-card-row">
+          <div class="hero-card-stat">
+            <label>Satisfação</label>
+            <strong style="color:var(--gold)">98%</strong>
+          </div>
+          <div class="hero-card-stat">
+            <label>Anos de experiência</label>
+            <strong>10+</strong>
+          </div>
+          <div class="hero-card-stat">
+            <label>Suporte</label>
+            <strong style="font-size:16px">Seg–Sex</strong>
+          </div>
+        </div>
+      </div>
+      <div class="hero-float-1">
+        <div class="float-icon gold">✅</div>
+        <div class="float-text">
+          <strong>Contabilidade em dia</strong>
+          <span>Prestações de contas mensais</span>
+        </div>
+      </div>
+      <div class="hero-float-2">
+        <div class="float-icon blue">🔒</div>
+        <div class="float-text">
+          <strong>Portal 100% digital</strong>
+          <span>Acesse boletos e documentos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-up">
+      <div class="stat-number">100<span>+</span></div>
+      <div class="stat-label">Condomínios gerenciados</div>
+    </div>
+    <div class="stat-item fade-up delay-1">
+      <div class="stat-number">10<span>+</span></div>
+      <div class="stat-label">Anos de experiência</div>
+    </div>
+    <div class="stat-item fade-up delay-2">
+      <div class="stat-number">7</div>
+      <div class="stat-label">Serviços especializados</div>
+    </div>
+    <div class="stat-item fade-up delay-3">
+      <div class="stat-number">98<span>%</span></div>
+      <div class="stat-label">Índice de satisfação</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-label fade-up">Serviços</div>
+      <h2 class="section-title fade-up delay-1">Tudo que seu condomínio<br /><em>precisa em um só lugar</em></h2>
+      <p class="section-desc fade-up delay-2">Oferecemos uma solução completa para a gestão do seu condomínio, com profissionais especializados em cada área.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🏢</div>
+        <h3 class="service-title">Síndico Profissional</h3>
+        <p class="service-desc">Orientação especializada para a liderança do condomínio, com gestão transparente e eficiente de todas as demandas.</p>
+      </div>
+      <div class="service-card fade-up delay-1">
+        <div class="service-icon">📊</div>
+        <h3 class="service-title">Contabilidade</h3>
+        <p class="service-desc">Balanços mensais, circulares e editais com total transparência financeira para todos os condôminos.</p>
+      </div>
+      <div class="service-card fade-up delay-2">
+        <div class="service-icon">💰</div>
+        <h3 class="service-title">Assessoria Financeira</h3>
+        <p class="service-desc">Previsão orçamentária, cálculo de taxas especiais e gestão financeira estratégica para o equilíbrio do condomínio.</p>
+      </div>
+      <div class="service-card fade-up delay-3">
+        <div class="service-icon">💻</div>
+        <h3 class="service-title">Serviços Online</h3>
+        <p class="service-desc">Acesso digital a boletos, documentos e extratos. Portal do condômino disponível 24 horas, 7 dias por semana.</p>
+      </div>
+      <div class="service-card fade-up delay-4">
+        <div class="service-icon">📋</div>
+        <h3 class="service-title">Cobranças</h3>
+        <p class="service-desc">Emissão de boletos mensais e notificações de inadimplência com processos ágeis e eficientes.</p>
+      </div>
+      <div class="service-card fade-up delay-5">
+        <div class="service-icon">⚖️</div>
+        <h3 class="service-title">Assessoria Jurídica</h3>
+        <p class="service-desc">Análise de contratos, recuperação de dívidas e orientação em questões trabalhistas e contratuais.</p>
+      </div>
+      <div class="service-card fade-up" style="grid-column: 1 / -1; max-width: 380px;">
+        <div class="service-icon">👥</div>
+        <h3 class="service-title">Departamento Pessoal</h3>
+        <p class="service-desc">Folha de pagamento, admissões, demissões e conformidade fiscal para os funcionários do condomínio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual fade-up">
+        <div class="about-img-wrap">
+          <div class="about-img-pattern"></div>
+          <div class="about-img-text">
+            <span class="big">10+</span>
+            <span class="small">Anos de excelência</span>
+          </div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-icon">🏆</div>
+          <div>
+            <strong>+100</strong>
+            <span>Condomínios confiantes</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content fade-up delay-2">
+        <div class="section-label">Sobre a SEJAAN</div>
+        <h2 class="section-title">Comprometida com a <em>excelência</em> na gestão</h2>
+        <p class="section-desc">
+          A SEJAAN Administradora é referência em gestão condominial na região de Niterói-RJ. Com uma equipe dedicada e processos modernos, cuidamos do seu patrimônio com a seriedade que ele merece.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">🔍</div>
+            <div class="about-feature-text">
+              <h4>Transparência total</h4>
+              <p>Prestação de contas detalhada e acessível para todos os condôminos, com relatórios claros e precisos.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">⚡</div>
+            <div class="about-feature-text">
+              <h4>Eficiência operacional</h4>
+              <p>Processos otimizados e tecnologia moderna para garantir a melhor gestão do seu condomínio.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🤝</div>
+            <div class="about-feature-text">
+              <h4>Equipe especializada</h4>
+              <p>Profissionais experientes e comprometidos com o bem-estar do seu condomínio e de todos os moradores.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center; max-width: 600px; margin: 0 auto 0;">
+      <div class="section-label fade-up" style="justify-content:center">Como funciona</div>
+      <h2 class="section-title fade-up delay-1">Começar é <em>simples</em></h2>
+      <p class="section-desc fade-up delay-2" style="margin: 0 auto;">Em poucos passos, seu condomínio estará sob a gestão profissional da SEJAAN.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Primeiro contato</h3>
+        <p class="step-desc">Entre em contato por telefone, WhatsApp ou e-mail para agendar uma visita sem compromisso.</p>
+      </div>
+      <div class="process-step fade-up delay-1">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Diagnóstico gratuito</h3>
+        <p class="step-desc">Nossa equipe visita o condomínio e apresenta uma proposta personalizada às suas necessidades.</p>
+      </div>
+      <div class="process-step fade-up delay-2">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Contrato e onboarding</h3>
+        <p class="step-desc">Assinamos o contrato e iniciamos o processo de transição de forma organizada e tranquila.</p>
+      </div>
+      <div class="process-step fade-up delay-3">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Gestão ativa</h3>
+        <p class="step-desc">A partir daí, cuidamos de tudo. Você acompanha tudo pelo portal online com total transparência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL -->
+<section class="portal" id="portal">
+  <div class="section-inner">
+    <div class="portal-inner-grid">
+      <div class="fade-up">
+        <div class="section-label">Portal Online</div>
+        <h2 class="section-title">Acesso digital ao seu <em>condomínio</em></h2>
+        <p class="section-desc">Tudo que você precisa disponível na palma da mão. Boletos, atas, documentos e relatórios financeiros em um só lugar.</p>
+        <div class="portal-features">
+          <div class="portal-feature">
+            <div class="portal-feature-icon">📄</div>
+            <h4>Boletos digitais</h4>
+            <p>Acesse e pague sua taxa condominial online</p>
+          </div>
+          <div class="portal-feature">
+            <div class="portal-feature-icon">📁</div>
+            <h4>Documentos</h4>
+            <p>Atas de assembleia, convenção e regulamento</p>
+          </div>
+          <div class="portal-feature">
+            <div class="portal-feature-icon">📈</div>
+            <h4>Extratos</h4>
+            <p>Acompanhe as finanças do condomínio</p>
+          </div>
+          <div class="portal-feature">
+            <div class="portal-feature-icon">🔔</div>
+            <h4>Comunicados</h4>
+            <p>Avisos e notificações em tempo real</p>
+          </div>
+        </div>
+        <a href="https://www.immobileweb.com.br/login/sejaan" target="_blank" class="btn-primary" style="margin-top:32px; display:inline-flex;">
+          Acessar portal
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+      <div class="portal-visual-wrap fade-up delay-2">
+        <div class="portal-mock">
+          <div class="portal-mock-bar">
+            <div class="mock-dot r"></div>
+            <div class="mock-dot y"></div>
+            <div class="mock-dot g"></div>
+            <div class="mock-url">🔒 immobileweb.com.br/login/sejaan</div>
+          </div>
+          <div class="portal-mock-body">
+            <div class="mock-row">
+              <div class="mock-row-left">Taxa condominial — Maio/2025</div>
+              <div class="mock-row-right"><span class="mock-badge green">Pago ✓</span></div>
+            </div>
+            <div class="mock-row">
+              <div class="mock-row-left">Taxa condominial — Junho/2025</div>
+              <div class="mock-row-right"><span class="mock-badge yellow">Pendente</span></div>
+            </div>
+            <div class="mock-row">
+              <div class="mock-row-left">Fundo de reserva</div>
+              <div class="mock-row-right" style="color:var(--gold-light)">R$ 28.450,00</div>
+            </div>
+            <div class="mock-row">
+              <div class="mock-row-left">Ata — Assembleia Geral 2025</div>
+              <div class="mock-row-right" style="color:rgba(255,255,255,0.5);font-size:12px">📄 Ver documento</div>
+            </div>
+            <div class="mock-row">
+              <div class="mock-row-left">Últimas manutenções</div>
+              <div class="mock-row-right" style="color:rgba(255,255,255,0.5);font-size:12px">3 registros</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center; max-width: 600px; margin: 0 auto 64px;">
+      <div class="section-label fade-up" style="justify-content:center">Depoimentos</div>
+      <h2 class="section-title fade-up delay-1">O que dizem nossos <em>clientes</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">A SEJAAN transformou a administração do nosso condomínio. A transparência nas contas e a agilidade no atendimento são incomparáveis. Recomendo a todos.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div>
+            <div class="author-name">Maria R.</div>
+            <div class="author-role">Síndica — Condomínio Icaraí</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up delay-1">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Finalmente uma administradora que realmente resolve os problemas. O portal online é excelente e conseguimos acompanhar todas as finanças em tempo real.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CS</div>
+          <div>
+            <div class="author-name">Carlos S.</div>
+            <div class="author-role">Morador — Edifício São Pedro</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up delay-2">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Já trabalhamos com outras administradoras antes. A SEJAAN é de longe a mais profissional. Equipe atenciosa, sempre disponível e muito competente.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AO</div>
+          <div>
+            <div class="author-name">Ana O.</div>
+            <div class="author-role">Condômina — Residencial Niterói</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS BAR -->
+<div class="hours-bar">
+  <div class="hours-inner">
+    <div class="hours-text">
+      <span class="icon">🕐</span>
+      <div>
+        <strong>Horário de atendimento</strong>
+        <span>Seg–Qui: 9h–12h / 14h–18h &nbsp;·&nbsp; Sex: 9h–12h / 14h–17h30</span>
+      </div>
+    </div>
+    <a href="https://wa.me/5521982240010" target="_blank" class="hours-cta">
+      💬 &nbsp;Falar no WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contato">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="fade-up">
+        <div class="section-label">Contato</div>
+        <h2 class="section-title">Vamos cuidar do<br /><em>seu condomínio</em></h2>
+        <p class="section-desc">Entre em contato e receba uma proposta personalizada para o seu condomínio sem compromisso.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-body">
+              <h4>Endereço</h4>
+              <p>Rua Gavião Peixoto, Nº 182, Sala 621<br />Icaraí, Niterói-RJ · CEP 24.230-101</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-body">
+              <h4>Telefone</h4>
+              <a href="tel:+552126103185">(21) 2610-3185</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">💬</div>
+            <div class="contact-item-body">
+              <h4>WhatsApp</h4>
+              <a href="https://wa.me/5521982240010" target="_blank">(21) 98224-0010</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-body">
+              <h4>E-mail</h4>
+              <a href="mailto:contato@sejaanadministradora.com.br">contato@sejaanadministradora.com.br</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up delay-2">
+        <div class="contact-form">
+          <h3 style="color:var(--white);font-size:20px;font-weight:600;margin-bottom:24px;">Solicitar proposta</h3>
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome *</label>
+                <input type="text" placeholder="Seu nome completo" required />
+              </div>
+              <div class="form-group">
+                <label>Telefone *</label>
+                <input type="tel" placeholder="(21) 9xxxx-xxxx" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>E-mail *</label>
+              <input type="email" placeholder="seu@email.com" required />
+            </div>
+            <div class="form-group">
+              <label>Tipo de condomínio</label>
+              <select>
+                <option value="">Selecione...</option>
+                <option>Residencial</option>
+                <option>Comercial</option>
+                <option>Misto</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mensagem</label>
+              <textarea placeholder="Conte um pouco sobre seu condomínio..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit">
+              Enviar solicitação
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+            <p class="form-note">Retornaremos em até 1 dia útil · Sem compromisso</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="#" class="nav-logo" style="display:inline-flex">
+          <div class="nav-logo-icon">S</div>
+          <span class="nav-logo-text">SEJAAN<span>.</span></span>
+        </a>
+        <p class="footer-brand-desc">Administradora de condomínios completa, moderna e transparente. Cuidamos do seu patrimônio com excelência há mais de 10 anos.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/sejaancondominios" target="_blank" class="social-link" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sejaancondominios" target="_blank" class="social-link" title="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/5521982240010" target="_blank" class="social-link" title="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Serviços</div>
+        <ul class="footer-links">
+          <li><a href="#servicos">Síndico Profissional</a></li>
+          <li><a href="#servicos">Contabilidade</a></li>
+          <li><a href="#servicos">Assessoria Financeira</a></li>
+          <li><a href="#servicos">Cobranças</a></li>
+          <li><a href="#servicos">Assessoria Jurídica</a></li>
+          <li><a href="#servicos">Departamento Pessoal</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#portal">Portal Online</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a href="https://www.immobileweb.com.br/login/sejaan" target="_blank">Área do Cliente</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contato</div>
+        <ul class="footer-links">
+          <li><a href="tel:+552126103185">(21) 2610-3185</a></li>
+          <li><a href="https://wa.me/5521982240010">(21) 98224-0010</a></li>
+          <li><a href="mailto:contato@sejaanadministradora.com.br">contato@sejaanadministradora<br>.com.br</a></li>
+          <li style="color:rgba(255,255,255,0.3);font-size:13px;margin-top:8px">Icaraí, Niterói-RJ</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 SEJAAN Administradora · Todos os direitos reservados</p>
+      <div class="footer-legal">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5521982240010" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wapp-label">Fale conosco</span>
+</a>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Intersection observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function openMenu() { document.getElementById('mobileNav').classList.add('open'); }
+  function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.textContent = '✓ Solicitação enviada!';
+    btn.style.background = '#28C840';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.innerHTML = 'Enviar solicitação <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
+  }
+
+  // Counter animation
+  function animateCount(el, target, suffix = '') {
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.querySelector('span')
+        ? el.innerHTML = Math.floor(current) + '<span>' + suffix + '</span>'
+        : el.textContent = Math.floor(current) + suffix;
+      if (current >= target) clearInterval(timer);
+    }, 20);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const nums = e.target.querySelectorAll('.stat-number');
+        nums.forEach(n => {
+          const text = n.textContent;
+          const match = text.match(/(\d+)/);
+          if (match) {
+            const val = parseInt(match[1]);
+            const suffix = text.replace(/\d+/, '');
+            n.dataset.animated = 'true';
+            animateCount(n, val, suffix);
+          }
+        });
+        statsObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) statsObserver.observe(statsBar);
+</script>
+
+</body>
+</html>
