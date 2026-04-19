@@ -348,11 +348,27 @@
     .form-submit { width: 100%; justify-content: center; font-size: 16px; }
     .form-note { text-align: center; margin-top: 14px; font-size: 12px; color: var(--gray-500); }
 
+    /* ─── BLOG PREVIEW ───────────────────────────── */
+    .blog-preview { background: var(--gray-50); }
+    .blog-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .blog-prev-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gray-100); transition: all 0.3s; text-decoration: none; display: block; }
+    .blog-prev-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .blog-prev-thumb { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--yellow-pale), var(--yellow-soft)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; }
+    .blog-prev-cat { position: absolute; top: 12px; left: 12px; background: var(--yellow); color: var(--white); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
+    .blog-prev-body { padding: 20px; }
+    .blog-prev-date { font-size: 12px; color: var(--gray-500); margin-bottom: 6px; }
+    .blog-prev-title { font-size: 16px; font-weight: 600; color: var(--dark); line-height: 1.4; margin-bottom: 8px; }
+    .blog-prev-card:hover .blog-prev-title { color: var(--yellow-dark); }
+    .blog-prev-excerpt { font-size: 13px; color: var(--gray-500); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .blog-cta-row { text-align: center; margin-top: 48px; }
+    .blog-empty { grid-column: 1/-1; text-align: center; padding: 48px; color: var(--gray-500); font-size: 15px; }
+
     /* ─── FOOTER ─────────────────────────────────── */
     footer { background: var(--dark); padding: 60px 0 28px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .footer-logo img { height: 48px; margin-bottom: 16px; display: block; }
+    .footer-logo-wrap { background: var(--white); display: inline-flex; border-radius: 10px; padding: 8px 14px; margin-bottom: 16px; }
+    .footer-logo-wrap img { height: 40px; display: block; }
     .footer-desc { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 260px; margin-bottom: 24px; }
     .footer-social { display: flex; gap: 10px; }
     .social-link { width: 38px; height: 38px; border-radius: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 16px; transition: all 0.2s; }
@@ -422,6 +438,7 @@
       <li><a href="#servicos">Serviços</a></li>
       <li><a href="#sobre">Sobre nós</a></li>
       <li><a href="#portal">Portal</a></li>
+      <li><a href="blog.html">Blog</a></li>
       <li><a href="#contato">Contato</a></li>
       <li><a href="https://www.immobileweb.com.br/login/sejaan" target="_blank" class="nav-cta">Área do Cliente</a></li>
     </ul>
@@ -435,6 +452,7 @@
   <a href="#servicos" onclick="closeMenu()">Serviços</a>
   <a href="#sobre" onclick="closeMenu()">Sobre nós</a>
   <a href="#portal" onclick="closeMenu()">Portal</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
   <a href="#contato" onclick="closeMenu()">Contato</a>
   <a href="https://www.immobileweb.com.br/login/sejaan" target="_blank" style="color:var(--yellow-dark)">Área do Cliente ↗</a>
 </div>
@@ -760,6 +778,22 @@
   </div>
 </section>
 
+<!-- BLOG PREVIEW -->
+<section class="blog-preview" id="blog">
+  <div class="section-inner">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+      <div>
+        <div class="section-label fade-up">Blog</div>
+        <h2 class="section-title fade-up delay-1">Dicas e novidades sobre<br /><em>gestão condominial</em></h2>
+      </div>
+      <a href="blog.html" class="btn-outline fade-up delay-2" style="flex-shrink:0;margin-bottom:20px">Ver todos os posts →</a>
+    </div>
+    <div class="blog-preview-grid" id="blogPreviewGrid">
+      <div class="blog-empty">Carregando posts...</div>
+    </div>
+  </div>
+</section>
+
 <!-- HOURS BAR -->
 <div class="hours-bar">
   <div class="hours-inner">
@@ -861,7 +895,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="footer-logo"><img src="logo.jpg" alt="SEJAAN Administradora" /></div>
+        <div class="footer-logo-wrap"><img src="logo.jpg" alt="SEJAAN Administradora" /></div>
         <p class="footer-desc">Administradora de condomínios completa, moderna e transparente. Cuidamos do seu patrimônio com excelência há mais de 10 anos em Niterói-RJ.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/sejaancondominios" target="_blank" class="social-link" title="Instagram">
@@ -891,6 +925,7 @@
         <ul class="footer-links">
           <li><a href="#sobre">Sobre nós</a></li>
           <li><a href="#portal">Portal Online</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="#contato">Contato</a></li>
           <li><a href="https://www.immobileweb.com.br/login/sejaan" target="_blank">Área do Cliente</a></li>
         </ul>
@@ -943,6 +978,42 @@
       btn.style.background = '';
     }, 3000);
   }
+
+  // Blog preview
+  async function loadBlogPreview() {
+    const grid = document.getElementById('blogPreviewGrid');
+    if (!grid) return;
+    try {
+      const res = await fetch('./posts.json?t=' + Date.now());
+      const all = await res.json();
+      const posts = all.filter(p => p.published !== false)
+                       .sort((a, b) => new Date(b.date) - new Date(a.date))
+                       .slice(0, 3);
+      if (!posts.length) {
+        grid.innerHTML = '<div class="blog-empty">Em breve teremos novidades por aqui. <a href="blog.html" style="color:var(--yellow-dark)">Acesse o blog</a></div>';
+        return;
+      }
+      function fmtDate(iso) {
+        if (!iso) return '';
+        return new Date(iso + 'T12:00:00').toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+      }
+      grid.innerHTML = posts.map(p => `
+        <a class="blog-prev-card" href="blog.html">
+          <div class="blog-prev-thumb">
+            ${p.image ? `<img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" />` : '📝'}
+            <span class="blog-prev-cat">${p.category || 'Geral'}</span>
+          </div>
+          <div class="blog-prev-body">
+            <div class="blog-prev-date">📅 ${fmtDate(p.date)}</div>
+            <div class="blog-prev-title">${p.title}</div>
+            <div class="blog-prev-excerpt">${p.excerpt || ''}</div>
+          </div>
+        </a>`).join('');
+    } catch {
+      grid.innerHTML = '<div class="blog-empty"><a href="blog.html" style="color:var(--yellow-dark)">Visitar o blog →</a></div>';
+    }
+  }
+  loadBlogPreview();
 
   // Counter animation
   const statsObs = new IntersectionObserver(entries => {
